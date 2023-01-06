@@ -5,14 +5,25 @@ import { FetchPost } from "./app/ajax.js";
 import { create_dir } from "./app/fs.js";
 import { get_posts_file } from "./app/middlewares.js";
 // Interfaces
-import { PostInfoInterface } from "./app/interfaces.js";
+import { PostInfoInterface, PostItemInterface } from "./app/interfaces.js";
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
+    const fetch_image_and_export = (originalUrl = PostItemInterface.body.images[0].originalUrl) => {
+        // 
+    };
+    const one_image_cb = (item = PostItemInterface.body.images[0], index = 0) => {
+        const api_interface = {
+            filename: `${String( index + 1 )}.${item.extension}`,
+            url: item.originalUrl,
+        };
+        console.log( api_interface );
+    }
     const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
         await create_dir(result_path);
         await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
+        one_image_cb(result.post.body.images[0], 0);
     };
     one_script( posts[0], root_path );
 };
@@ -25,7 +36,7 @@ const main = async (account = "") => {
     // Step 1: Fetch all posts
     const result_path = `./results/${account}`;
     const posts = await get_posts_file(account, result_path);
-    // Step 2: Create the author
+    // Step 2: Create the author & write posts file
     await create_dir(result_path);
     await writeFile(posts.path, posts.content);
     // Step 3: Fetch a post info

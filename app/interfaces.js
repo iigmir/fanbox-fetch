@@ -23,7 +23,7 @@ export const PostInfoInterface = {
     "excerpt": ""
 };
 
-export const PostDataInterface = {
+export const PostItemInterface = {
     "id": "",
     "title": "",
     "feeRequired": 0,
