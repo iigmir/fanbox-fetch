@@ -1,10 +1,4 @@
-const fetch_options = {
-    headers: {
-        "Accept": "application/json, text/plain, */*",
-        "Origin": `https://fanbox.cc`,
-        "Referer": `https://fanbox.cc`,
-    }
-};
+import fetch_options from "./options.js";
 
 export default async (creatorId = "") => {
     const base_url = `https://api.fanbox.cc`;
