@@ -8,21 +8,23 @@ import { get_posts_file } from "./app/middlewares.js";
 import { PostInfoInterface, PostItemInterface } from "./app/interfaces.js";
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
-    const one_image_cb = (root_path = "") => async (item = PostItemInterface.body.images[0], index = 0) => {
+    const image_main = async (item = PostItemInterface.body.images[0], index = 0, root_path) => {
         const api_interface = {
-            filename: `${String( index + 1 )}.${item.extension}`,
-            path: `${root_path}/${item.id}/${String( index + 1 )}.${item.extension}`,
+            filename: `${String(index + 1)}.${item.extension}`,
+            path: `${root_path}/${item.id}/${String(index + 1)}.${item.extension}`,
             url: item.originalUrl,
         };
-        const buffer = await FetchImage( api_interface.url );
-        create_image( api_interface.path, buffer );
-    }
+        console.log("Downloading: " + api_interface.path);
+        const buffer = await FetchImage(api_interface.url);
+        create_image(api_interface.path, buffer);
+    };
+    // const one_image_cb = (root_path = "") => image_main;
     const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
         await create_dir(result_path);
         await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
-        one_image_cb(root_path)(result.post.body.images[0], 0);
+        image_main(result.post.body.images[0], 0, root_path);
     };
     one_script( posts[0], root_path );
 };
