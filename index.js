@@ -1,17 +1,11 @@
 // Packages
-import { mkdir, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 // Scripts
-import { FetchPostAPI, FetchPosts, FetchPost } from "./app/ajax.js";
+import { FetchPost } from "./app/ajax.js";
+import { create_dir } from "./app/fs.js";
+import { get_posts_file } from "./app/middlewares.js";
 // Interfaces
 import { PostInfoInterface } from "./app/interfaces.js";
-
-const create_dir = async (path = "") => {
-    try {
-        await mkdir(path);
-    } catch (error) {
-        console.warn(error.message);
-    }
-};
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
     const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
@@ -23,16 +17,6 @@ const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/ex
     one_script( posts[0], root_path );
 };
 
-
-const get_posts_file = async (account = "", result_path = "") => {
-    const apiurl = await FetchPostAPI(account);
-    const posts = await FetchPosts(apiurl);
-    return {
-        path: `${result_path}/posts.json`,
-        content: JSON.stringify(posts),
-    };
-};
-
 const main = async (account = "") => {
     // Input check
     if( account.length < 1 || account == undefined ) {
@@ -40,7 +24,7 @@ const main = async (account = "") => {
     }
     // Step 1: Create the author
     const result_path = `./results/${account}`;
-    create_dir(result_path);
+    await create_dir(result_path);
     // Step 2: Fetch all posts
     const posts = await get_posts_file(account, result_path);
     await writeFile(posts.path, posts.content);
