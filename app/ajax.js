@@ -9,7 +9,7 @@ const options = {
         "Accept": "application/json, text/plain, */*",
         "Origin": `https://fanbox.cc`,
         "Referer": `https://fanbox.cc`,
-        cookie: process.env.USER_COOKIE
+        "Cookie": process.env.USER_COOKIE
     }
 };
 
