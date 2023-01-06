@@ -14,12 +14,13 @@ const create_dir = async (path = "") => {
 };
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
-    const get_one = async (post = PostInfoInterface, root_path = "./results/example") => {
+    const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
+        await create_dir(result_path);
         await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
     };
-    get_one( posts[0], root_path );
+    one_script( posts[0], root_path );
 };
 
 const main = async (account = "") => {
