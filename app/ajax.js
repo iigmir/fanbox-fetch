@@ -10,7 +10,8 @@ const options = {
         "Accept": "application/json, text/plain, */*",
         "Origin": `https://fanbox.cc`,
         "Referer": `https://fanbox.cc`,
-        "Cookie": process.env.USER_COOKIE
+        "Cookie": process.env.USER_COOKIE,
+	    "User-Agent": "Mozilla/5.0 (Linux) Gecko/20100101 Firefox/108.0"
     }
 };
 
