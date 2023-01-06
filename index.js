@@ -23,21 +23,21 @@ const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/ex
     one_script( posts[0], root_path );
 };
 
+
+const get_posts_file = async (account = "", result_path = "") => {
+    const apiurl = await FetchPostAPI(account);
+    const posts = await FetchPosts(apiurl);
+    return {
+        path: `${result_path}/posts.json`,
+        content: JSON.stringify(posts),
+    };
+};
+
 const main = async (account = "") => {
     // Input check
     if( account.length < 1 || account == undefined ) {
         throw new Error("No account given");
     }
-    // Functions
-    const get_posts_file = async (account = "", result_path = "") => {
-        const apiurl = await FetchPostAPI(account);
-        const posts = await FetchPosts(apiurl);
-        return {
-            path: `${result_path}/posts.json`,
-            content: JSON.stringify(posts),
-        };
-    };
-    // Main
     // Step 1: Create the author
     const result_path = `./results/${account}`;
     create_dir(result_path);
