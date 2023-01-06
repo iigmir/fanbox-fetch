@@ -18,13 +18,28 @@ const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/ex
         const buffer = await FetchImage(api_interface.url);
         create_image(api_interface.path, buffer);
     };
-    // const one_image_cb = (root_path = "") => image_main;
     const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
+        const images = result.post.body.images;
         await create_dir(result_path);
         await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
-        result.post.body.images.forEach( image_main(root_path, result.post.id) );
+        const ajax_images = Promise.all( images.map( async (item, index) => {
+            const api_interface = {
+                filename: `${String(index + 1)}.${item.extension}`,
+                path: `${root_path}/${result.post.id}/${String(index + 1)}.${item.extension}`,
+                url: item.originalUrl,
+            };
+            console.log("Downloading: " + api_interface.path);
+            const buffer = await FetchImage(api_interface.url);
+            return { path: api_interface.path, buffer };
+        }) );
+        ajax_images.then( loaded_imgs => {
+            loaded_imgs.forEach( its => {
+                create_image(its.path, its.buffer);
+            });
+        });
+        // images.forEach( image_main(root_path, result.post.id) );
     };
     one_script( posts[0], root_path );
 };
