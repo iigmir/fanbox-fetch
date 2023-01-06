@@ -1,5 +1,5 @@
 // Packages
-import { opendir, mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 // Scripts
 import { FetchPostAPI, FetchPosts } from "./app/ajax.js";
 
