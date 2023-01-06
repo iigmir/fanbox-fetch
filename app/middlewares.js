@@ -1,4 +1,4 @@
-import { FetchPostAPI, FetchPosts } from "./app/ajax.js";
+import { FetchPostAPI, FetchPosts } from "./ajax.js";
 
 export const get_posts_file = async (account = "", result_path = "") => {
     const apiurl = await FetchPostAPI(account);
