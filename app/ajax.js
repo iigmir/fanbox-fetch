@@ -1,5 +1,6 @@
 import FetchPolyfill from "node-fetch";
 import dotenv from "dotenv";
+dotenv.config();
 
 const base_url = `https://api.fanbox.cc`;
 
@@ -13,10 +14,7 @@ const options = {
     }
 };
 
-// Pre-production scripts
-// Load dotenv
-dotenv.config();
-// Fetch polyfill
+// fetch API polyfill
 if( fetch == undefined ) {
     fetch = FetchPolyfill;
 }
@@ -42,8 +40,6 @@ export const FetchPosts = async (url = "") => {
 export const FetchPost = async (postId = "") => {
     const url = `${base_url}/post.info?postId=${postId}`;
     const { body } = await fetch( url, options ).then( r => r.json() );
-    // console.log({ url, postId, options, response });
-    // console.log( body );
     return {
         author: body.creatorId,
         postId: postId,
