@@ -47,9 +47,15 @@ export const FetchPost = async (postId = "") => {
     };
 };
 
+/**
+ * 
+ * @param {String} url 
+ * @returns {Buffer}
+ */
 export const FetchImage = async (url = "") => {
     const imageBlob = await fetch( url, options ).then( r => r.blob() );
-    return imageBlob;
+    const arrayBuffer = await imageBlob.arrayBuffer();
+    return Buffer.from(arrayBuffer);
 };
 
 
