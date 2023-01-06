@@ -1,13 +1,7 @@
-import FetchPolyfill from "node-fetch";
-import FetchPostAPI from "./app/fetch-post-api.js";
-import FetchPosts from "./app/fetch-posts.js";
+import { FetchPostAPI, FetchPosts } from "./app/ajax.js";
 import { strictEqual } from "assert";
 
 const account = "hiten";
-
-if( fetch == undefined ) {
-    fetch = FetchPolyfill;
-}
 
 describe("FetchPostAPI", () => {
     it("should render catch-all-post API", async () => {
