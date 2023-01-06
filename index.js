@@ -2,8 +2,8 @@
 import FetchPolyfill from "node-fetch";
 import { opendir, mkdir, writeFile } from "node:fs/promises";
 // Scripts
-import FetchPostAPI from "./app/fetch-post-api.js";
-import FetchPosts from "./app/fetch-posts.js";
+import FetchPostAPI from "./app/post-api.js";
+import FetchPosts from "./app/posts.js";
 
 if( fetch == undefined ) {
     fetch = FetchPolyfill;
