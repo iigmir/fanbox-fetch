@@ -1,10 +1,9 @@
 import FetchPolyfill from "node-fetch";
+import dotenv from "dotenv";
 
-if( fetch == undefined ) {
-    fetch = FetchPolyfill;
-}
+const base_url = `https://api.fanbox.cc`;
 
-export const options = {
+const options = {
     headers: {
         "Accept": "application/json, text/plain, */*",
         "Origin": `https://fanbox.cc`,
@@ -12,8 +11,19 @@ export const options = {
     }
 };
 
+// Pre-production scripts
+// Load dotenv
+dotenv.config();
+// Fetch polyfill
+if( fetch == undefined ) {
+    fetch = FetchPolyfill;
+}
+// Load user cookie
+if( process.env.USER_COOKIE ) {
+    options.headers["Cookie"] = process.env.USER_COOKIE;
+}
+
 export const FetchPostAPI = async (creatorId = "") => {
-    const base_url = `https://api.fanbox.cc`;
     const ajax_url = `${base_url}/post.paginateCreator?creatorId=${creatorId}`;
     const { body } = await fetch( ajax_url, options ).then( r => r.json() );
     const get_params = (body = [""]) => {
@@ -29,6 +39,16 @@ export const FetchPostAPI = async (creatorId = "") => {
 export const FetchPosts = async (url = "") => {
     const { body } = await fetch( url, options ).then( r => r.json() );
     return body.items;
+};
+
+export const FetchPost = async (postId = "") => {
+    const url = `${base_url}/post.info?postId=${postId}`;
+    const { body } = await fetch( url, options ).then( r => r.json() );
+    return {
+        author: body.creatorId,
+        postId: postId,
+        post: body
+    };
 };
 
 
