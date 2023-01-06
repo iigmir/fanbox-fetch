@@ -4,10 +4,12 @@ import dotenv from "dotenv";
 const base_url = `https://api.fanbox.cc`;
 
 const options = {
+    credentials: "include",
     headers: {
         "Accept": "application/json, text/plain, */*",
         "Origin": `https://fanbox.cc`,
         "Referer": `https://fanbox.cc`,
+        cookie: process.env.USER_COOKIE
     }
 };
 
@@ -17,10 +19,6 @@ dotenv.config();
 // Fetch polyfill
 if( fetch == undefined ) {
     fetch = FetchPolyfill;
-}
-// Load user cookie
-if( process.env.USER_COOKIE ) {
-    options.headers["Cookie"] = process.env.USER_COOKIE;
 }
 
 export const FetchPostAPI = async (creatorId = "") => {
@@ -43,7 +41,9 @@ export const FetchPosts = async (url = "") => {
 
 export const FetchPost = async (postId = "") => {
     const url = `${base_url}/post.info?postId=${postId}`;
-    const { body } = await fetch( url, options ).then( r => r.json() );
+    const response = await fetch( url, options ).then( r => r.json() );
+    console.log( response );
+    // console.log( body );
     return {
         author: body.creatorId,
         postId: postId,
