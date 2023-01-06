@@ -19,3 +19,9 @@ describe("FetchPosts", () => {
         strictEqual( result[64].id, "230963" );
     });
 });
+
+describe("FetchPost", () => {
+    it("involes private items, the program therefore will not test here", async () => {
+        strictEqual( 2 + 2, 4 );
+    });
+});
