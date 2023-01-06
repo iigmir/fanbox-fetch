@@ -47,4 +47,9 @@ export const FetchPost = async (postId = "") => {
     };
 };
 
+export const FetchImage = async (url = "") => {
+    const imageBlob = await fetch( url, options ).then( r => r.blob() );
+    return imageBlob;
+};
+
 
