@@ -13,10 +13,13 @@ const create_dir = async (path = "") => {
     }
 };
 
-const fetch_post = async (post = PostInfoInterface, root_path = "./results/example") => {
-    const result = await FetchPost(post.id);
-    const result_path = `${root_path}/${result.postId}`;
-    await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
+const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
+    const get_one = async (post = PostInfoInterface, root_path = "./results/example") => {
+        const result = await FetchPost(post.id);
+        const result_path = `${root_path}/${result.postId}`;
+        await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
+    };
+    get_one( posts[0], root_path );
 };
 
 const main = async (account = "") => {
@@ -41,7 +44,7 @@ const main = async (account = "") => {
     const posts = await get_posts_file(account, result_path);
     await writeFile(posts.path, posts.content);
     // Step 3: Fetch a post info
-    await fetch_post(posts[0], result_path);
+    await fetch_post(JSON.parse(posts.content), result_path);
 };
 
 main(process.argv[2]);

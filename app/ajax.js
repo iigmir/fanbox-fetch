@@ -41,8 +41,8 @@ export const FetchPosts = async (url = "") => {
 
 export const FetchPost = async (postId = "") => {
     const url = `${base_url}/post.info?postId=${postId}`;
-    const response = await fetch( url, options ).then( r => r.json() );
-    console.log( response );
+    const { body } = await fetch( url, options ).then( r => r.json() );
+    // console.log({ url, postId, options, response });
     // console.log( body );
     return {
         author: body.creatorId,
