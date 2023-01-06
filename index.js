@@ -8,16 +8,6 @@ import { get_posts_file } from "./app/middlewares.js";
 import { PostInfoInterface, PostItemInterface } from "./app/interfaces.js";
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
-    const image_main = (root_path, result_id) => async (item = PostItemInterface.body.images[0], index = 0) => {
-        const api_interface = {
-            filename: `${String(index + 1)}.${item.extension}`,
-            path: `${root_path}/${result_id}/${String(index + 1)}.${item.extension}`,
-            url: item.originalUrl,
-        };
-        console.log("Downloading: " + api_interface.path);
-        const buffer = await FetchImage(api_interface.url);
-        create_image(api_interface.path, buffer);
-    };
     const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
