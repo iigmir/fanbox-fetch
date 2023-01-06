@@ -9,6 +9,7 @@ import { PostInfoInterface, PostItemInterface } from "./app/interfaces.js";
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
     const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
+        console.log("Downloading: " + post.id);
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
         const images = result.post.body.images;
@@ -20,13 +21,19 @@ const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/ex
                 path: `${root_path}/${result.post.id}/${String(index + 1)}.${item.extension}`,
                 url: item.originalUrl,
             };
-            console.log("Downloading: " + api_interface.path);
-            const buffer = await FetchImage(api_interface.url);
-            return { path: api_interface.path, buffer };
+            try {
+                const buffer = await FetchImage(api_interface.url);
+                return { path: api_interface.path, buffer, okay: true };
+            } catch (error) {
+                await writeFile("./error.log", error);
+                return { path: api_interface.path, buffer: error, okay: false };
+            }
         }) );
         ajax_images.then( loaded_imgs => {
             loaded_imgs.forEach( its => {
-                create_image(its.path, its.buffer);
+                if( its.okay ) {
+                    create_image(its.path, its.buffer);
+                }
             });
         });
         // images.forEach( image_main(root_path, result.post.id) );
