@@ -1,13 +1,7 @@
 // Packages
-import FetchPolyfill from "node-fetch";
 import { opendir, mkdir, writeFile } from "node:fs/promises";
 // Scripts
-import FetchPostAPI from "./app/post-api.js";
-import FetchPosts from "./app/posts.js";
-
-if( fetch == undefined ) {
-    fetch = FetchPolyfill;
-}
+import { FetchPostAPI, FetchPosts } from "./app/ajax.js";
 
 const main = async (account = "") => {
     // Input check
