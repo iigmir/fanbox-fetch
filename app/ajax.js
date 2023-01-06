@@ -51,6 +51,7 @@ export const FetchPost = async (postId = "") => {
  * 
  * @param {String} url 
  * @returns {Buffer}
+ * @see <https://stackoverflow.com/a/69589656>
  */
 export const FetchImage = async (url = "") => {
     const imageBlob = await fetch( url, options ).then( r => r.blob() );
