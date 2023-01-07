@@ -1,4 +1,3 @@
-import FetchPolyfill from "node-fetch";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -15,9 +14,8 @@ const options = {
     }
 };
 
-// fetch API polyfill
 if( fetch == undefined ) {
-    fetch = FetchPolyfill;
+    throw new Error("Fetch API required");
 }
 
 export const FetchPostAPI = async (creatorId = "") => {
