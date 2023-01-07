@@ -1,9 +1,8 @@
 // Packages
 import { writeFile } from "node:fs/promises";
 // Scripts
-import { FetchPost } from "./app/ajax.js";
 import { create_dir } from "./app/fs.js";
-import { get_posts_file, fetch_image_action } from "./app/middlewares.js";
+import { get_posts_file } from "./app/middlewares.js";
 import PostScript from "./single-post.js";
 // Interfaces
 import { PostInfoInterface } from "./app/interfaces.js";

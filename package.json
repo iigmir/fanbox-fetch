@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "mocha index.spec.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "single": "node fetch-single-file.js"
   },
   "keywords": [],
   "author": "",
