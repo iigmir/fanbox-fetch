@@ -1,4 +1,5 @@
 import PostScript from "./single-post.js";
+import { create_dir } from "./app/fs.js";
 
 const account = process.argv[2];
 const id = process.argv[3];
@@ -12,7 +13,8 @@ const main = async (account = "", id = "") => {
     }
     const result_path = `./results/${account}`;
     const post = { id };
-    PostScript(result_path, post);
+    await create_dir(result_path);
+    PostScript(result_path)(post);
 }
 
 main(account, id);
