@@ -8,6 +8,14 @@ import { create_image } from "./fs.js";
  * @property {String} content Author info content.
  */
 /**
+ * @typedef {Object} PromisedImageResponse
+ * @property {String} path Path of the image should created to.
+ * @property {Buffer|null} buffer Image buffer. Returns `null` if requesting failed.
+ * @property {Error|null} error Error info if image requesting failed. Returns `null` if requesting successed.
+ * @property {Boolean} okay Whether the requesting successed or not. `true` means yes and `false` means not.
+ */
+
+/**
  * Fetch posts info
  * @param {String} account 
  * @param {String} result_path 
@@ -22,7 +30,19 @@ export const get_posts_file = async (account = "", result_path = "") => {
     };
 };
 
+/**
+ * image_promise
+ * @param {String} root_path 
+ * @param {String} id 
+ * @returns {Function}
+ */
 export const image_promise = (root_path = "./results/example", id = "") => {
+    /**
+     * image_promise
+     * @param {PostImageInterface} item 
+     * @param {Number} index 
+     * @returns {PromisedImageResponse}
+     */
     return async (item = PostImageInterface, index = 0) => {
         const api_interface = {
             filename: `${String(index + 1)}.${item.extension}`,
