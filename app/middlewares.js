@@ -1,6 +1,6 @@
 import { FetchPostAPI, FetchPosts, FetchImage } from "./ajax.js";
 import { PostImageInterface } from "./interfaces.js";
-import { writeFile } from "node:fs/promises";
+import { create_image } from "./fs.js";
 
 export const get_posts_file = async (account = "", result_path = "") => {
     const apiurl = await FetchPostAPI(account);
@@ -29,3 +29,15 @@ export const image_promise = (root_path = "./results/example", id = "") => {
     };
 }
 
+export const fetch_image_action = (images, root_path = "./results/example", result) => {
+    const ajax_images = Promise.all(images.map(image_promise(root_path, result.post.id)));
+    const loaded_action = loaded_imgs => {
+        const cb = its => {
+            if (its.okay) {
+                create_image(its.path, its.buffer);
+            }
+        };
+        loaded_imgs.forEach(cb);
+    };
+    ajax_images.then(loaded_action);
+};
