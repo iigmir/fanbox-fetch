@@ -99,10 +99,21 @@ const image_action = (resolve, reject) => {
  * @returns {Promise}
  */
 export const fetch_image_action = (images = [PostImageInterface], root_path = "./results/example", post_id = "") => {
-    return new Promise( (resolve, reject) => {
+    /**
+     * The main function.
+     * @param {Promise.resolve} resolve [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+     * @param {Promise.reject} reject [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
+     */
+    const main = (resolve, reject) => {
         const ajax_images = images.map( image_promise(root_path, post_id) );
-        Promise.all( ajax_images ).then( (loaded_imgs) => {
+        /**
+         * Just a middleware...
+         * @param {Array[PromisedImageResponse]} loaded_imgs 
+         */
+        const action = (loaded_imgs = []) => {
             loaded_imgs.forEach( image_action(resolve, reject) );
-        }).catch( e => reject(e) );
-    });
+        };
+        Promise.all(ajax_images).then(action).catch(e => reject(e));
+    };
+    return new Promise( main );
 };
