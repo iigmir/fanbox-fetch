@@ -11,7 +11,7 @@ const options = {
         "Origin": `https://fanbox.cc`,
         "Referer": `https://fanbox.cc`,
         "Cookie": process.env.USER_COOKIE,
-	    "User-Agent": "Mozilla/5.0 (Linux) Gecko/20100101 Firefox/108.0"
+	    "User-Agent": "Mozilla/5.0 (Linux) Gecko/20100101 Firefox/100.0 iFanboxFetch/1.0"
     }
 };
 
