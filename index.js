@@ -1,28 +1,11 @@
 // Packages
 import { writeFile } from "node:fs/promises";
 // Scripts
-import { FetchPost, FetchImage } from "./app/ajax.js";
+import { FetchPost } from "./app/ajax.js";
 import { create_dir, create_image } from "./app/fs.js";
-import { get_posts_file } from "./app/middlewares.js";
+import { get_posts_file, image_promise } from "./app/middlewares.js";
 // Interfaces
-import { PostInfoInterface, PostImageInterface } from "./app/interfaces.js";
-
-function image_promise(root_path, result) {
-    return async (item = PostImageInterface, index = 0) => {
-        const api_interface = {
-            filename: `${String(index + 1)}.${item.extension}`,
-            path: `${root_path}/${result.post.id}/${String(index + 1)}.${item.extension}`,
-            url: item.originalUrl,
-        };
-        try {
-            const buffer = await FetchImage(api_interface.url);
-            return { path: api_interface.path, buffer, okay: true };
-        } catch (error) {
-            await writeFile("./error.log", error);
-            return { path: api_interface.path, buffer: error, okay: false };
-        }
-    };
-}
+import { PostInfoInterface } from "./app/interfaces.js";
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
     const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
@@ -33,7 +16,7 @@ const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/ex
         // AJAX
         await create_dir(result_path);
         await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
-        const ajax_images = Promise.all( images.map( image_promise(root_path, result) ) );
+        const ajax_images = Promise.all( images.map( image_promise(root_path, result.post.id) ) );
         const loaded_action = loaded_imgs => {
             loaded_imgs.forEach(its => {
                 if (its.okay) {
