@@ -31,14 +31,13 @@ export const get_posts_file = async (account = "", result_path = "") => {
 };
 
 /**
- * image_promise
- * @param {String} root_path 
+ * Request image
+ * @param {String} root_path The exporting path for the author.
  * @param {String} id 
  * @returns {Function}
  */
 export const image_promise = (root_path = "./results/example", id = "") => {
     /**
-     * image_promise
      * @param {PostImageInterface} item 
      * @param {Number} index 
      * @returns {PromisedImageResponse}
@@ -70,7 +69,14 @@ export const image_promise = (root_path = "./results/example", id = "") => {
     };
 }
 
-export const fetch_image_action = (images = [], root_path = "./results/example", result) => {
+/**
+ * Fetch images provided
+ * @param {Array[PostImageInterface]} images Input images path
+ * @param {String} root_path The exporting path for the author.
+ * @param {String} post_id 
+ * @returns {Promise}
+ */
+export const fetch_image_action = (images = [PostImageInterface], root_path = "./results/example", post_id = "") => {
     return new Promise( (resolve, reject) => {
         const image_action = (resolve, reject) => {
             return its => {
@@ -82,12 +88,8 @@ export const fetch_image_action = (images = [], root_path = "./results/example",
                 }
             };
         }
-        const ajax_images = Promise.all(
-            images.map(
-                image_promise(root_path, result.post.id)
-            )
-        );
-        ajax_images.then( (loaded_imgs) => {
+        const ajax_images = images.map( image_promise(root_path, post_id) );
+        Promise.all( ajax_images ).then( (loaded_imgs) => {
             loaded_imgs.forEach( image_action(resolve, reject) );
         }).catch( e => reject(e) );
     });
