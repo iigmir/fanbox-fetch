@@ -21,12 +21,11 @@ import { create_image } from "./fs.js";
  * @returns {Buffer} Image buffer.
  * @see <https://stackoverflow.com/a/69589656>
  */
-const FetchImage = async (url = "") => {
+const fetch_image = async (url = "") => {
     const imageBlob = await fetch( url, options ).then( r => r.blob() );
     const arrayBuffer = await imageBlob.arrayBuffer();
     return Buffer.from(arrayBuffer);
 };
-
 
 /**
  * Request image.
@@ -49,7 +48,7 @@ const image_promise = (root_path = "./results/example", id = "") => {
             url: item.originalUrl,
         };
         try {
-            const buffer = await FetchImage(api_interface.url);
+            const buffer = await fetch_image(api_interface.url);
             return {
                 path: api_interface.path,
                 buffer: buffer,
@@ -98,7 +97,7 @@ const image_action = (resolve, reject) => {
  * @param {String} post_id 
  * @returns {Promise}
  */
-export const fetch_image_action = (images = [PostImageInterface], root_path = "./results/example", post_id = "") => {
+export const FetchImageAction = (images = [PostImageInterface], root_path = "./results/example", post_id = "") => {
     /**
      * The main function.
      * @param {Promise.resolve} resolve [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
