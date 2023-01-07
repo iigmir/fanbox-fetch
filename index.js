@@ -13,7 +13,10 @@ import { PostInfoInterface } from "./app/interfaces.js";
  * @param {String} root_path 
  */
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
-    posts.forEach( PostScript(root_path) );
+    // posts.forEach( PostScript(root_path) );
+    for (const post of posts) {
+        await PostScript(root_path)(post);
+    }
 };
 
 const main = async (account = "") => {

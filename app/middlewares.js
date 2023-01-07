@@ -50,15 +50,25 @@ export const image_promise = (root_path = "./results/example", id = "") => {
     };
 }
 
-export const fetch_image_action = (images, root_path = "./results/example", result) => {
-    const ajax_images = Promise.all(images.map(image_promise(root_path, result.post.id)));
-    const loaded_action = loaded_imgs => {
-        const cb = its => {
-            if (its.okay) {
-                create_image(its.path, its.buffer);
-            }
-        };
-        loaded_imgs.forEach(cb);
-    };
-    ajax_images.then(loaded_action);
+export const fetch_image_action = (images = [], root_path = "./results/example", result) => {
+    return new Promise( (resolve, reject) => {
+        const image_action = (resolve, reject) => {
+            return its => {
+                if (its.okay) {
+                    create_image(its.path, its.buffer);
+                    resolve(its.path);
+                } else {
+                    reject(its.error);
+                }
+            };
+        }
+        const ajax_images = Promise.all(
+            images.map(
+                image_promise(root_path, result.post.id)
+            )
+        );
+        ajax_images.then( (loaded_imgs) => {
+            loaded_imgs.forEach( image_action(resolve, reject) );
+        }).catch( e => reject(e) );
+    });
 };

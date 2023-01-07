@@ -16,7 +16,7 @@ export default (root_path = "./results/example") => {
         await create_dir(result_path);
         await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
         if (Array.isArray(images)) {
-            fetch_image_action(images, root_path, result);
+            await fetch_image_action(images, root_path, result);
         }
     };
 }
