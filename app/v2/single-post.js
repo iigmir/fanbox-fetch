@@ -15,6 +15,22 @@ export const FetchPost = async (postId = "") => {
     };
 };
 
+/**
+ * Pretty much all params from `/post.paginateCreator`. which normolly returns something like this:
+ * 
+ * ```json
+ * [
+ *     "https://api.fanbox.cc/post.listCreator?creatorId=CREATOR&maxPublishedDatetime=PUBLISHED_DATE&maxId=FIRST_POST_ID&limit=PAGES_LISTED",
+ *     "...so on"
+ * ]
+ * ```
+ * 
+ * Here, the function alter the `limit` param to total number of posts by the creator,
+ * so that the `FetchPostAPI` function can request all posts.
+ * 
+ * @param {Array} body Response items from `/post.paginateCreator`.
+ * @returns {String} Params for `/post.listCreator`.
+ */
 const GenerateListCreatorParams = (body = [""]) => {
     const search = new URL(body[0]).search.slice(1);
     const params_array = search.split( "&" ).map( a => a.split("=") );
