@@ -10,12 +10,15 @@
     "single": "node fetch-single-file.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "iigmir",
   "license": "ISC",
   "devDependencies": {
     "mocha": "^10.2.0"
   },
   "dependencies": {
     "dotenv": "^16.0.3"
+  },
+  "engines": {
+    "node": "18.0.0"
   }
 }
