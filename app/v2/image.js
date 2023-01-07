@@ -16,12 +16,12 @@ import { create_image } from "./fs.js";
  */
 
 /**
- * 
+ * Request image: use fetch
  * @param {String} url Given image URL.
  * @returns {Buffer} Image buffer.
  * @see <https://stackoverflow.com/a/69589656>
  */
-export const FetchImage = async (url = "") => {
+const FetchImage = async (url = "") => {
     const imageBlob = await fetch( url, options ).then( r => r.blob() );
     const arrayBuffer = await imageBlob.arrayBuffer();
     return Buffer.from(arrayBuffer);
@@ -34,7 +34,7 @@ export const FetchImage = async (url = "") => {
  * @param {String} id 
  * @returns {Function}
  */
-export const image_promise = (root_path = "./results/example", id = "") => {
+const image_promise = (root_path = "./results/example", id = "") => {
     /**
      * @param {PostImageInterface} item 
      * @param {Number} index 
