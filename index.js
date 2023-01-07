@@ -5,10 +5,10 @@ import { FetchPost, FetchImage } from "./app/ajax.js";
 import { create_dir, create_image } from "./app/fs.js";
 import { get_posts_file } from "./app/middlewares.js";
 // Interfaces
-import { PostInfoInterface, PostItemInterface } from "./app/interfaces.js";
+import { PostInfoInterface, PostImageInterface } from "./app/interfaces.js";
 
 function image_promise(root_path, result) {
-    return async (item, index) => {
+    return async (item = PostImageInterface, index = 0) => {
         const api_interface = {
             filename: `${String(index + 1)}.${item.extension}`,
             path: `${root_path}/${result.post.id}/${String(index + 1)}.${item.extension}`,
@@ -29,19 +29,19 @@ const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/ex
         console.log("Downloading: " + post.id);
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
-        // const images = result.post.body.images;
-        const images = [result.post.body.images[0]];
+        const images = result.post.body.images;
+        // AJAX
         await create_dir(result_path);
         await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
         const ajax_images = Promise.all( images.map( image_promise(root_path, result) ) );
-        ajax_images.then( loaded_imgs => {
-            loaded_imgs.forEach( its => {
-                if( its.okay ) {
+        const loaded_action = loaded_imgs => {
+            loaded_imgs.forEach(its => {
+                if (its.okay) {
                     create_image(its.path, its.buffer);
                 }
             });
-        });
-        // images.forEach( image_main(root_path, result.post.id) );
+        };
+        ajax_images.then( loaded_action );
     };
     one_script( posts[0], root_path );
 };

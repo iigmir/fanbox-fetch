@@ -71,3 +71,5 @@ export const PostItemInterface = {
     },
     "imageForShare": ""
 }
+
+export const PostImageInterface = PostItemInterface.body.images;
