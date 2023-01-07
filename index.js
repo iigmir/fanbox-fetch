@@ -8,7 +8,7 @@ import { get_posts_file, image_promise } from "./app/middlewares.js";
 import { PostInfoInterface } from "./app/interfaces.js";
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
-    const one_script = async (post = PostInfoInterface, root_path = "./results/example") => {
+    const fetch_post = async (post = PostInfoInterface, root_path = "./results/example") => {
         console.log("Downloading: " + post.id);
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
@@ -26,7 +26,9 @@ const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/ex
         };
         ajax_images.then( loaded_action );
     };
-    one_script( posts[0], root_path );
+    posts.forEach( post => {
+        fetch_post( post, root_path );
+    });
 };
 
 const main = async (account = "") => {

@@ -1,5 +1,5 @@
 import { FetchPostAPI, FetchPosts, FetchImage } from "./ajax.js";
-import { PostImageInterface } from "./app/interfaces.js";
+import { PostImageInterface } from "./interfaces.js";
 
 export const get_posts_file = async (account = "", result_path = "") => {
     const apiurl = await FetchPostAPI(account);
