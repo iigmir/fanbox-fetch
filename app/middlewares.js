@@ -1,5 +1,6 @@
 import { FetchPostAPI, FetchPosts, FetchImage } from "./ajax.js";
 import { PostImageInterface } from "./interfaces.js";
+import { writeFile } from "node:fs/promises";
 
 export const get_posts_file = async (account = "", result_path = "") => {
     const apiurl = await FetchPostAPI(account);
@@ -21,7 +22,8 @@ export const image_promise = (root_path = "./results/example", id = "") => {
             const buffer = await FetchImage(api_interface.url);
             return { path: api_interface.path, buffer, okay: true };
         } catch (error) {
-            await writeFile("./error.log", error);
+            // await writeFile("./error.log", error);
+            console.warn( error );
             return { path: api_interface.path, buffer: error, okay: false };
         }
     };
