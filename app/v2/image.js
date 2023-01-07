@@ -16,7 +16,7 @@ import { create_image } from "./fs.js";
  */
 
 /**
- * Request image: use fetch
+ * Request image by using fetch
  * @param {String} url Given image URL.
  * @returns {Buffer} Image buffer.
  * @see <https://stackoverflow.com/a/69589656>
@@ -33,7 +33,7 @@ const fetch_image = async (url = "") => {
  * @param {String} id 
  * @returns {Function}
  */
-const image_promise = (root_path = "./results/example", id = "") => {
+const generate_image_promise = (root_path = "./results/example", id = "") => {
     /**
      * The main function.
      * @see [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
@@ -74,7 +74,7 @@ const image_promise = (root_path = "./results/example", id = "") => {
  * @param {Promise.reject} reject [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
  * @returns {Function}
  */
-const image_action = (resolve, reject) => {
+const actions_after_requesting = (resolve, reject) => {
     /**
      * The main function.
      * @see [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
@@ -104,13 +104,13 @@ export const FetchImageAction = (images = [PostImageInterface], root_path = "./r
      * @param {Promise.reject} reject [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
      */
     const main = (resolve, reject) => {
-        const ajax_images = images.map( image_promise(root_path, post_id) );
+        const ajax_images = images.map( generate_image_promise(root_path, post_id) );
         /**
          * Just a middleware...
          * @param {Array[PromisedImageResponse]} loaded_imgs 
          */
         const action = (loaded_imgs = []) => {
-            loaded_imgs.forEach( image_action(resolve, reject) );
+            loaded_imgs.forEach( actions_after_requesting(resolve, reject) );
         };
         Promise.all(ajax_images).then(action).catch(e => reject(e));
     };
