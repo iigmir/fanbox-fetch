@@ -20,11 +20,21 @@ export const image_promise = (root_path = "./results/example", id = "") => {
         };
         try {
             const buffer = await FetchImage(api_interface.url);
-            return { path: api_interface.path, buffer, okay: true };
+            return {
+                path: api_interface.path,
+                buffer: buffer,
+                error: null,
+                okay: true
+            };
         } catch (error) {
             // await writeFile("./error.log", error);
             console.warn( error );
-            return { path: api_interface.path, buffer: error, okay: false };
+            return {
+                path: api_interface.path,
+                buffer: null,
+                error: error,
+                okay: false
+            };
         }
     };
 }
