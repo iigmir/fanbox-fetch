@@ -29,13 +29,15 @@ const FetchImage = async (url = "") => {
 
 
 /**
- * Request image
+ * Request image.
  * @param {String} root_path The exporting path for the author.
  * @param {String} id 
  * @returns {Function}
  */
 const image_promise = (root_path = "./results/example", id = "") => {
     /**
+     * The main function.
+     * @see [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
      * @param {PostImageInterface} item 
      * @param {Number} index 
      * @returns {PromisedImageResponse}
@@ -67,7 +69,18 @@ const image_promise = (root_path = "./results/example", id = "") => {
     };
 };
 
+/**
+ * What should we do after requesting image?
+ * @param {Promise.resolve} resolve [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+ * @param {Promise.reject} reject [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
+ * @returns {Function}
+ */
 const image_action = (resolve, reject) => {
+    /**
+     * The main function.
+     * @see [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+     * @param {PromisedImageResponse} its
+     */
     return its => {
         if (its.okay) {
             create_image(its.path, its.buffer);
@@ -81,7 +94,7 @@ const image_action = (resolve, reject) => {
 /**
  * Fetch images provided
  * @param {Array[PostImageInterface]} images Input images path
- * @param {String} root_path The exporting path for the author.
+ * @param {String} root_path The exporting path for the author
  * @param {String} post_id 
  * @returns {Promise}
  */
