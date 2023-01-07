@@ -1,13 +1,13 @@
 {
   "name": "fanbox-fetch",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "mocha index.spec.js",
     "start": "node index.js",
-    "single": "node fetch-single-file.js"
+    "single": "node app/fetch-single-file.js"
   },
   "keywords": [],
   "author": "iigmir",

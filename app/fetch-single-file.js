@@ -1,5 +1,5 @@
 import PostScript from "./single-post.js";
-import { create_dir } from "./app/v2/fs.js";
+import { create_dir } from "../lib/fs.js";
 
 const account = process.argv[2];
 const id = process.argv[3];

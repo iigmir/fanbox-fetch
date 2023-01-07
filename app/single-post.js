@@ -1,10 +1,10 @@
 // Packages
 import { writeFile } from "node:fs/promises";
 // Scripts
-import { FetchPost } from "./app/v2/single-post.js";
-import { create_dir } from "./app/v2/fs.js";
-import { FetchImageAction } from "./app/v2/image.js";
-import { PostInfoInterface } from "./app/v2/interfaces.js";
+import { FetchPost } from "../lib/single-post.js";
+import { create_dir } from "../lib/fs.js";
+import { FetchImageAction } from "../lib/image.js";
+import { PostInfoInterface } from "../lib/interfaces.js";
 
 export default (root_path = "./results/example") => {
     return async (post = PostInfoInterface) => {
