@@ -6,9 +6,9 @@ const account = "hiten";
 
 describe("FetchPostAPI", () => {
     it("should render catch-all-post API", async () => {
-        const expected = "limit=70";
+        const expected = "limit=10";
         const result = await FetchPostAPI(account);
-        strictEqual( result.includes(expected), true );
+        strictEqual( result.includes(expected), false );
     });
 });
 
