@@ -36,7 +36,7 @@ export const FetchPost = async (postId = "") => {
  * so that the `FetchPostAPI` function can request all posts.
  * 
  * @param {Array} body Response items from `/post.paginateCreator`.
- * @returns {String} Params for `/post.listCreator`.
+ * @returns {String} Params for `/post.listCreator` like `creatorId=CREATOR&maxPublishedDatetime=PUBLISHED_DATE&maxId=FIRST_POST_ID&limit=TOTAL_PAGEs`.
  */
 const GenerateListCreatorParams = (body = [""]) => {
     const search = new URL(body[0]).search.slice(1);
