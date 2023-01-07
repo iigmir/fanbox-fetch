@@ -2,9 +2,15 @@ import { FetchPostAPI } from "./single-post.js";
 import { options } from "./fetch.js";
 
 /**
+ * @typedef {Object} AuthorPostsInfo
+ * @property {String} path Path the info should created to.
+ * @property {String} content Author info content.
+ */
+
+/**
  * Well... Posts.
  * @param {String} url URL
- * @returns {Object}
+ * @returns {Array}
  */
 export const FetchPosts = async (url = "") => {
     const { body } = await fetch( url, options ).then( r => r.json() );

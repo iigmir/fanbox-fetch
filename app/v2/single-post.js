@@ -1,9 +1,16 @@
 import { base_url, options } from "./fetch.js";
 
 /**
+ * @typedef {Object} PostInterface
+ * @property {String} author The creator's account name.
+ * @property {String} postId The post's ID.
+ * @property {Object} post The post's infomation.
+ */
+
+/**
  * Get the post info
  * @param {String} postId 
- * @returns {Object}
+ * @returns {PostInterface}
  */
 export const FetchPost = async (postId = "") => {
     const url = `${base_url}/post.info?postId=${postId}`;
