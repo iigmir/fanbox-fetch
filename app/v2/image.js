@@ -18,7 +18,7 @@ import { create_image } from "./fs.js";
 /**
  * Request image by using fetch
  * @param {String} url Given image URL.
- * @returns {Buffer} Image buffer.
+ * @returns {ArrayBuffer} Image buffer.
  * @see <https://stackoverflow.com/a/69589656>
  */
 const fetch_image = async (url = "") => {
