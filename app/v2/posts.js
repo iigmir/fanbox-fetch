@@ -1,4 +1,5 @@
 import { FetchPostAPI } from "./single-post.js";
+import { options } from "./fetch.js";
 
 /**
  * Well... Posts.
