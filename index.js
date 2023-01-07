@@ -4,8 +4,6 @@ import { writeFile } from "node:fs/promises";
 import { create_dir } from "./app/fs.js";
 import { get_posts_file } from "./app/middlewares.js";
 import PostScript from "./single-post.js";
-// Interfaces
-import { PostInfoInterface } from "./app/interfaces.js";
 
 /**
  * Request action
@@ -13,7 +11,7 @@ import { PostInfoInterface } from "./app/interfaces.js";
  * @param {String} root_path 
  * @see <https://stackoverflow.com/a/37576787>
  */
-const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
+const fetch_post = async (posts = [], root_path = "./results/example") => {
     for (const post of posts) {
         await PostScript(root_path)(post);
     }
