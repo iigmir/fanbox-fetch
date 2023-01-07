@@ -1,8 +1,8 @@
 // Packages
 import { writeFile } from "node:fs/promises";
 // Scripts
-import { create_dir } from "./app/fs.js";
-import { get_posts_file } from "./app/middlewares.js";
+import { create_dir } from "./app/v2/fs.js";
+import { get_posts_file } from "./app/v2/posts.js";
 import PostScript from "./single-post.js";
 
 /**
