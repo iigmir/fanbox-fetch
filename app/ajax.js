@@ -18,6 +18,11 @@ if( fetch == undefined ) {
     throw new Error("Fetch API required");
 }
 
+/**
+ * Get the creator's posts API path
+ * @param {String} creatorId 
+ * @returns {String} API path
+ */
 export const FetchPostAPI = async (creatorId = "") => {
     const ajax_url = `${base_url}/post.paginateCreator?creatorId=${creatorId}`;
     const { body } = await fetch( ajax_url, options ).then( r => r.json() );
@@ -31,11 +36,21 @@ export const FetchPostAPI = async (creatorId = "") => {
     return `${base_url}/post.listCreator?${params}`;
 };
 
+/**
+ * Well... Posts.
+ * @param {String} url URL
+ * @returns {Object}
+ */
 export const FetchPosts = async (url = "") => {
     const { body } = await fetch( url, options ).then( r => r.json() );
     return body.items;
 };
 
+/**
+ * Get the post info
+ * @param {String} postId 
+ * @returns {Object}
+ */
 export const FetchPost = async (postId = "") => {
     const url = `${base_url}/post.info?postId=${postId}`;
     const { body } = await fetch( url, options ).then( r => r.json() );
