@@ -8,12 +8,12 @@ import PostScript from "./single-post.js";
 import { PostInfoInterface } from "./app/interfaces.js";
 
 /**
- * Fetch a post info
+ * Request action
  * @param {Array[PostInfoInterface]} posts 
  * @param {String} root_path 
+ * @see <https://stackoverflow.com/a/37576787>
  */
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
-    // posts.forEach( PostScript(root_path) );
     for (const post of posts) {
         await PostScript(root_path)(post);
     }
