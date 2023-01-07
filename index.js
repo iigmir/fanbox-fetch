@@ -2,7 +2,7 @@
 import { writeFile } from "node:fs/promises";
 // Scripts
 import { create_dir } from "./app/v2/fs.js";
-import { get_posts_file } from "./app/v2/posts.js";
+import { get_posts_info } from "./app/v2/posts.js";
 import PostScript from "./single-post.js";
 
 /**
@@ -23,7 +23,7 @@ const main = async (account = "") => {
         throw new Error("No account given");
     }
     const result_path = `./results/${account}`;
-    const posts = await get_posts_file(account, result_path);
+    const posts = await get_posts_info(account, result_path);
     await create_dir(result_path);
     // write posts file
     await writeFile(posts.path, posts.content);

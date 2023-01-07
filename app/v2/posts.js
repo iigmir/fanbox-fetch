@@ -23,7 +23,7 @@ export const FetchPosts = async (url = "") => {
  * @param {String} result_path 
  * @returns {AuthorPostsInfo} The post info
  */
-export const get_posts_file = async (account = "", result_path = "") => {
+export const get_posts_info = async (account = "", result_path = "") => {
     const apiurl = await FetchPostAPI(account);
     const posts = await FetchPosts(apiurl);
     return {
