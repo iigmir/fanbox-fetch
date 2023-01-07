@@ -4,7 +4,7 @@ import { writeFile } from "node:fs/promises";
 import { FetchPost } from "./app/ajax.js";
 import { create_dir } from "./app/fs.js";
 import { fetch_image_action } from "./app/middlewares.js";
-import { PostInfoInterface } from "./app/interfaces";
+import { PostInfoInterface } from "./app/interfaces.js";
 
 export default (root_path = "./results/example") => {
     return async (post = PostInfoInterface) => {
