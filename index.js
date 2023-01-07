@@ -4,22 +4,12 @@ import { writeFile } from "node:fs/promises";
 import { FetchPost } from "./app/ajax.js";
 import { create_dir } from "./app/fs.js";
 import { get_posts_file, fetch_image_action } from "./app/middlewares.js";
+import PostScript from "./single-post.js";
 // Interfaces
 import { PostInfoInterface } from "./app/interfaces.js";
 
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
-    posts.forEach( async(post) => {
-        console.log("Downloading: " + post.id);
-        const result = await FetchPost(post.id);
-        const result_path = `${root_path}/${result.postId}`;
-        const images = result.post.body.images;
-        // AJAX
-        await create_dir(result_path);
-        await writeFile(`${result_path}/metafile.json`, JSON.stringify(result.post));
-        if( Array.isArray(images) ) {
-            fetch_image_action(images, root_path, result);
-        }
-    });
+    posts.forEach( PostScript(root_path) );
 };
 
 const main = async (account = "") => {
