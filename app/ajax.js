@@ -50,8 +50,8 @@ export const FetchPost = async (postId = "") => {
 
 /**
  * 
- * @param {String} url 
- * @returns {Buffer}
+ * @param {String} url Given image URL.
+ * @returns {Buffer} Image buffer.
  * @see <https://stackoverflow.com/a/69589656>
  */
 export const FetchImage = async (url = "") => {

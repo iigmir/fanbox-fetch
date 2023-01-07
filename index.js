@@ -7,6 +7,11 @@ import PostScript from "./single-post.js";
 // Interfaces
 import { PostInfoInterface } from "./app/interfaces.js";
 
+/**
+ * Fetch a post info
+ * @param {Array[PostInfoInterface]} posts 
+ * @param {String} root_path 
+ */
 const fetch_post = async (posts = [PostInfoInterface], root_path = "./results/example") => {
     posts.forEach( PostScript(root_path) );
 };
@@ -16,13 +21,11 @@ const main = async (account = "") => {
     if( account.length < 1 || account == undefined ) {
         throw new Error("No account given");
     }
-    // Step 1: Fetch all posts
     const result_path = `./results/${account}`;
     const posts = await get_posts_file(account, result_path);
-    // Step 2: Create the author & write posts file
     await create_dir(result_path);
+    // write posts file
     await writeFile(posts.path, posts.content);
-    // Step 3: Fetch a post info
     await fetch_post(JSON.parse(posts.content), result_path);
 };
 

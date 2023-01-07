@@ -2,6 +2,17 @@ import { FetchPostAPI, FetchPosts, FetchImage } from "./ajax.js";
 import { PostImageInterface } from "./interfaces.js";
 import { create_image } from "./fs.js";
 
+/**
+ * @typedef {Object} AuthorPostsInfo
+ * @property {String} path Path the info should created to.
+ * @property {String} content Author info content.
+ */
+/**
+ * Fetch posts info
+ * @param {String} account 
+ * @param {String} result_path 
+ * @returns {AuthorPostsInfo} The post info
+ */
 export const get_posts_file = async (account = "", result_path = "") => {
     const apiurl = await FetchPostAPI(account);
     const posts = await FetchPosts(apiurl);
