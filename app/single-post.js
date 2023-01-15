@@ -3,7 +3,7 @@ import { writeFile } from "node:fs/promises";
 // Scripts
 import { FetchPost } from "../lib/single-post.js";
 import { create_dir } from "../lib/fs.js";
-// import { FetchImageAction } from "../lib/image.js";
+import { FetchImageAction } from "../lib/image.js";
 import { PostInfoInterface } from "../lib/interfaces.js";
 import { GetImages } from "../lib/data-processing/index.js";
 
