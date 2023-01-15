@@ -31,9 +31,6 @@ export default (root_path = "./results/example") => {
         // AJAX
         await create_directory( result_path );
         await create_metadatas( result_path, result, result.post, images );
-        if (Array.isArray(images)) {
-            await FetchImageAction(images, root_path, result.post.id);
-        }
-        return Promise.resolve([]);
+        await FetchImageAction(images, root_path, result.post.id);
     };
 }
