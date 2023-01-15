@@ -12,7 +12,7 @@ export default (root_path = "./results/example") => {
         console.log("Downloading: " + post.id);
         const result = await FetchPost(post.id);
         const result_path = `${root_path}/${result.postId}`;
-        const images = GetImages( result.post.body );
+        const images = GetImages( result.post.body ).map( ({ content }) => content );
         // AJAX
         await create_dir(result_path);
         await writeFile(`${result_path}/metadata.json`, JSON.stringify(result.post));
