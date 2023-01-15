@@ -5,10 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha index.spec.js",
+    "test": "mocha",
     "start": "node index.js",
-    "json": "node app/ajax-json.js",
-    "single": "node app/fetch-single-file.js"
+    "json": "node ajax-json.js",
+    "single": "node ajax-single.js"
   },
   "keywords": [],
   "author": "iigmir",

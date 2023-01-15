@@ -16,8 +16,6 @@ const action = (up, source) => {
     fetch_post(contents, result_path);
 };
 
-const main = (path) => {
+export const main = (path) => {
     readFile( path, "utf-8", action);
 };
-
-main(process.argv[2]);

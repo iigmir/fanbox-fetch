@@ -1,5 +1,5 @@
-import { FetchPosts } from "./lib/posts.js";
-import { FetchPostAPI } from "./lib/single-post.js";
+import { FetchPosts } from "../lib/posts.js";
+import { FetchPostAPI } from "../lib/single-post.js";
 import { strictEqual } from "assert";
 
 const account = "hiten";
