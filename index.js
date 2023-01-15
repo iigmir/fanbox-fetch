@@ -1,4 +1,5 @@
 import { main } from "./app/posts.js";
 
-main(process.argv[2]);
+const account = process.argv[2];
 
+main(account);
