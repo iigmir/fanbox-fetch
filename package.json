@@ -8,7 +8,8 @@
     "test": "mocha",
     "start": "node index.js",
     "json": "node ajax-json.js",
-    "single": "node ajax-single.js"
+    "single": "node ajax-single.js",
+    "check": "node checksum.js"
   },
   "keywords": [],
   "author": "iigmir",
