@@ -8,7 +8,7 @@ import { PostInfoInterface } from "../lib/interfaces.js";
 import { GetImages } from "../lib/data-processing/index.js";
 
 export default (root_path = "./results/example") => {
-    const write_data_infos = (result_path, contents, metadata, images) => {
+    const write_data_infos = (result_path = "./results/example/1", contents = [], metadata = [], images = []) => {
         return Promise.all([
             writeFile(`${result_path}/contents.json`, JSON.stringify(contents)),
             writeFile(`${result_path}/metadata.json`, JSON.stringify(metadata)),
