@@ -31,6 +31,6 @@ export default (root_path = "./results/example") => {
         // AJAX
         await create_directory( result_path );
         await create_metadatas( result_path, result, result.post, images );
-        await FetchImageAction(images, root_path, result.post.id);
+        await FetchImageAction( images, root_path, result.post.id );
     };
 }
