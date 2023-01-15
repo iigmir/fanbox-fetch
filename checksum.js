@@ -20,7 +20,7 @@ const throw_up = up => { if (up) { throw up }; };
 function generate_error_info(root, errors) {
     const errorpath = `${root}/errors.json`;
     if (errors.length < 1) {
-        console.log(`Great. All image successfully fetched :-)`);
+        console.log(`Great. All images were successfully fetched :-)`);
     } else {
         console.error(`Please refer ${errorpath} for further details.`);
         writeFile(errorpath, JSON.stringify(errors), throw_up);
