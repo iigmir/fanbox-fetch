@@ -9,10 +9,12 @@ import { GetImages } from "../lib/data-processing/index.js";
 
 export default (root_path = "./results/example") => {
     const write_data_infos = (result_path = "./results/example/1", contents = [], metadata = [], images = []) => {
+        const metadata_dir = `${result_path}/metadata`;
         return Promise.all([
-            writeFile(`${result_path}/contents.json`, JSON.stringify(contents)),
-            writeFile(`${result_path}/metadata.json`, JSON.stringify(metadata)),
-            writeFile(`${result_path}/images.json`, JSON.stringify(images)),
+            create_dir(metadata_dir),
+            writeFile(`${metadata_dir}/contents.json`, JSON.stringify(contents)),
+            writeFile(`${metadata_dir}/metadata.json`, JSON.stringify(metadata)),
+            writeFile(`${metadata_dir}/images.json`, JSON.stringify(images)),
         ]);
     };
     return async (post = PostInfoInterface) => {
