@@ -8,9 +8,10 @@ import { PostInfoInterface } from "../lib/interfaces.js";
 import { GetImages } from "../lib/data-processing/index.js";
 
 export default (root_path = "./results/example") => {
-    const write_data_infos = (result_path = "./results/example/1", contents = [], metadata = [], images = []) => {
+    const write_dirs_and_metas = (result_path = "./results/example/1", contents = [], metadata = [], images = []) => {
         const metadata_dir = `${result_path}/metadata`;
         return Promise.all([
+            create_dir(result_path),
             create_dir(metadata_dir),
             writeFile(`${metadata_dir}/contents.json`, JSON.stringify(contents)),
             writeFile(`${metadata_dir}/metadata.json`, JSON.stringify(metadata)),
@@ -23,8 +24,7 @@ export default (root_path = "./results/example") => {
         const result_path = `${root_path}/${result.postId}`;
         const images = GetImages(result.post.body).map( ({ content }) => content );
         // AJAX
-        await create_dir(result_path);
-        await write_data_infos( result_path, result, result.post, images );
+        await write_dirs_and_metas( result_path, result, result.post, images );
         if (Array.isArray(images)) {
             await FetchImageAction(images, root_path, result.post.id);
         }
