@@ -34,5 +34,6 @@ export default (root_path = "./results/example") => {
         if (Array.isArray(images)) {
             await FetchImageAction(images, root_path, result.post.id);
         }
+        return Promise.resolve([]);
     };
 }
