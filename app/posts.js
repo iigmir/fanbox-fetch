@@ -3,6 +3,7 @@ import { writeFile } from "node:fs/promises";
 // Scripts
 import { create_dir } from "../lib/fs.js";
 import { get_posts_info } from "../lib/posts.js";
+import { GetAccount } from "./helpers.js";
 import PostScript from "./single-post.js";
 
 /**
@@ -17,11 +18,8 @@ export const fetch_post = async (posts = [], root_path = "./results/example") =>
     }
 };
 
-export const main = async (account = "") => {
-    // Input check
-    if( account.length < 1 || account == undefined ) {
-        throw new Error("No account given");
-    }
+export const main = async (input_account = "") => {
+    const account = GetAccount(input_account)
     const result_path = `./results/${account}`;
     const posts = await get_posts_info(account, result_path);
     await create_dir(result_path);
