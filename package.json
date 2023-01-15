@@ -7,6 +7,7 @@
   "scripts": {
     "test": "mocha index.spec.js",
     "start": "node index.js",
+    "json": "node app/ajax-json.js",
     "single": "node app/fetch-single-file.js"
   },
   "keywords": [],

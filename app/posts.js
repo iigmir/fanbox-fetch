@@ -11,7 +11,7 @@ import PostScript from "./single-post.js";
  * @param {String} root_path 
  * @see <https://stackoverflow.com/a/37576787>
  */
-const fetch_post = async (posts = [], root_path = "./results/example") => {
+export const fetch_post = async (posts = [], root_path = "./results/example") => {
     for (const post of posts) {
         await PostScript(root_path)(post);
     }
