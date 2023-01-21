@@ -1,5 +1,5 @@
 import { GetAccount, GetParsedUrl } from "../app/helpers.js";
-import { strictEqual, throws } from "assert";
+import { strictEqual, deepStrictEqual, throws } from "assert";
 
 describe("GetAccount", () => {
     it("should get an account", async () => {
@@ -26,20 +26,23 @@ describe("GetParsedUrl", () => {
         const input = "https://www.fanbox.cc/@hiten/posts/4949682";
         const result = GetParsedUrl(input);
         const expected = { account: "hiten", id: "4949682" };
-        strictEqual( result.includes(expected), false );
+        deepStrictEqual( result, expected );
     });
     it("should get an account and an ID: The URL prefix", async () => {
         const input = "https://miyajimareiji.fanbox.cc/posts/5130849";
         const result = GetParsedUrl(input);
         const expected = { account: "miyajimareiji", id: "5130849" };
-        strictEqual( result.includes(expected), false );
+        deepStrictEqual( result, expected );
+    });
+    it("should get an account and an ID: No ID", async () => {
+        const input = "https://miyajimareiji.fanbox.cc";
+        const result = GetParsedUrl(input);
+        const expected = { account: "miyajimareiji", id: "" };
+        deepStrictEqual( result, expected );
     });
     it("should throw an error if input is invalid: Domain", async () => {
         const input = "https://www.example.com";
-        throws( () => GetParsedUrl(input), { message: "Not a fanbox site" } );
-    });
-    it("should throw an error if input is invalid: Input", async () => {
-        const input = "https://miyajimareiji.fanbox.cc";
-        throws( () => GetParsedUrl(input), { message: "Insufficient infomation" } );
+        const expected = () => GetParsedUrl(input);
+        throws( expected, { message: "Not a fanbox site" } );
     });
 });
