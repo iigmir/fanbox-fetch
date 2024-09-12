@@ -1,5 +1,6 @@
 // Packages
-import { writeFile } from "node:fs/promises";
+import { writeFile, } from "node:fs/promises";
+import { existsSync, mkdirSync } from "fs";
 // Scripts
 import { FetchPost } from "../lib/single-post.js";
 import { create_dir } from "../lib/fs.js";
@@ -10,6 +11,9 @@ import { GetImages } from "../lib/data-processing/index.js";
 export default (root_path = "./results/example") => {
     const create_directory = (result_path = "./results/example/1") => {
         const metadata_dir = `${result_path}/metadata`;
+        if (!existsSync(result_path)) {
+            mkdirSync(result_path, { recursive: true });
+        }
         return Promise.all([
             create_dir(result_path),
             create_dir(metadata_dir),
