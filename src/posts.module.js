@@ -1,5 +1,5 @@
-import { FetchPostAPI } from "./single-post.js";
-import { options } from "./fetch.js";
+import { FetchPostAPI } from "./single-post.module.js";
+import { options } from "./fetch.module.js";
 
 /**
  * @typedef {Object} AuthorPostsInfo

@@ -37,6 +37,10 @@ export default (root_path = "./results/example") => {
         // AJAX
         await create_directory( result_path );
         await create_metadatas( result_path, result, result.post, images );
-        await FetchImageAction( images, root_path, result.post.id );
+        if( images.length < 16 ) {
+            await FetchImageAction( images, root_path, result.post.id );
+        } else {
+            console.warn("Images won't download because it is too many. Consider using Python script.");
+        }
     };
 }

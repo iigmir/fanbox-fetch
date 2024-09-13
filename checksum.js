@@ -3,7 +3,7 @@
  */
 
 import { readdir, readFile, writeFile } from "fs";
-import { GetAccount } from "./app/helpers.js";
+import { GetAccount } from "./src/helpers.js";
 
 const account = GetAccount( process.argv[2] );
 const root = `results/${account}`;

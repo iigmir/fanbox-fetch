@@ -1,4 +1,4 @@
-import { main } from "./app/ajax-json.js";
+import { main } from "./src/ajax-json.js";
 
 const account = process.argv[2];
 

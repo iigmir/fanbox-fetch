@@ -1,6 +1,6 @@
-import { main as main_by_account } from "./app/posts.js";
-import { main as main_by_url_params } from "./app/fetch-single-file.js";
-import { GetParsedUrl } from "./app/helpers.js";
+import { main as main_by_account } from "./src/posts.js";
+import { main as main_by_url_params } from "./src/fetch-single-file.js";
+import { GetParsedUrl } from "./src/helpers.js";
 
 const input = process.argv[2];
 
