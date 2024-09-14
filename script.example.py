@@ -3,13 +3,13 @@ import json
 import os
 
 # Your cookie (replace with your actual cookie string)
-cookie = {'cookie_name': '***'}
+cookie = { "cookie_name": "YOUR_COOKIE_AT_FANBOX" }
 
 # List of file URLs you want to download
 urls = []
 
 # Directory to save the downloaded files
-download_dir = './'
+download_dir = "./"
 
 with open('./metadata/images.json', 'r') as f:
     urls = json.load(f)
