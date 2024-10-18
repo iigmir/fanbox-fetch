@@ -9,7 +9,8 @@
     "start": "node index.js",
     "json": "node ajax-json.js",
     "single": "node ajax-single.js",
-    "check": "node checksum.js"
+    "check": "node checksum.js",
+    "env": "node env-generator.js"
   },
   "keywords": [],
   "author": "iigmir",
