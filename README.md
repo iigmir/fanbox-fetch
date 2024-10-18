@@ -16,7 +16,7 @@ To fetch images from [Pixiv Fanbox](https://www.fanbox.cc).
 
 ### Cookies
 
-To protect cross-domain abuse, modern web browsers implements [`HttpOnly`](https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.6) cookie, that can only retrieve when a they request to HTTP server and NOT accessiable by JavaScript.
+To protect cross-domain abuse, modern web browsers implements [`HttpOnly`](https://owasp.org/www-community/HttpOnly) cookie, that can only retrieve when a they request to HTTP server and NOT accessiable by JavaScript.
 
 Therefore, cookies cannot be retrived from `document.cookie` directly and needs to retrieve manually instead. You can retrieve it from the Network tag of their XHR requests (post.info in petucilar), as images below.
 
