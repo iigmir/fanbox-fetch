@@ -4,6 +4,12 @@ import os
 
 # Your cookie (replace with your actual cookie string)
 cookie = { "cookie_name": "YOUR_COOKIE_AT_FANBOX" }
+headers = {
+    "User-Agent": "Mozilla/5.0 (Linux) Gecko/20100101 Firefox/100.0 iFanboxFetch/1.0",
+    "Accept": "application/json, text/plain, */*",
+    "Origin": "https://fanbox.cc",
+    "Referer": "https://fanbox.cc",
+}
 
 # List of file URLs you want to download
 urls = []
@@ -14,10 +20,13 @@ download_dir = "./"
 with open('./metadata/images.json', 'r') as f:
     urls = json.load(f)
 
+session = requests.Session()
+session.cookies.update(cookie)
+session.headers.update(headers)
 
-def get_file(cookie, download_dir, url, file_name):
+def get_file(session, download_dir, url, file_name):
     # Make a GET request with the cookie
-    response = requests.get(url, cookies=cookie)
+    response = session.get(url)
 
     # Save the file to the specified directory
     if response.status_code == 200:
@@ -43,4 +52,4 @@ for index, item in enumerate(urls, start=1):
         # continue  # Skip this iteration if the file already exists
     else:
         print(f"Downloading {url} ...")
-        get_file(cookie, download_dir, url, file_name)
+        get_file(session, download_dir, url, file_name)
