@@ -50,6 +50,10 @@ To run unit tests.
 
 To test if there're issues of the script, you can use <https://www.fanbox.cc/@miyajimareiji/posts/7211007> (C103 「彼女、お借りします」幻のネーム) to test (`npm start https://www.fanbox.cc/@miyajimareiji/posts/7211007`) the script. The article is accessiable to everyone and you should get two images if no known issues of the script.
 
-### `npm env {COOKIE}`
+### `npm run env {COOKIE}`
 
 To create an `.env` file with cookie.
+
+## License
+
+We use the [ISC license](https://www.isc.org/licenses).
